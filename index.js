@@ -1,13 +1,17 @@
+const main = document.querySelector('main')
+let data;
+
 function fetchBooks() {
   return fetch('https://anapioficeandfire.com/api/books')
   .then(resp => resp.json())
-  .then(json => renderBooks(json));
+  .then(gotData => {
+    data = gotData;
+    renderBooks(gotData)
+  })
+};
 
-}
-
-function renderBooks(json) {
-  const main = document.querySelector('main')
-  json.forEach(book => {
+function renderBooks(gotData) {
+  gotData.forEach(book => {
     const h1 = document.createElement('h1')
     const h3 = document.createElement('h3')
     h1.innerHTML = `<h3>Book Name: <h1>${book.name}</h1></h3>`
@@ -17,14 +21,10 @@ function renderBooks(json) {
   })
 }
 
-function clickListener(json) {
-  const main = document.querySelector('main')
-    main.addEventListener('click', function(event) {
-      
-    })
+const eventFn = () => {
+  console.log(event.target)
+  event.target.style.color = 'blue'
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  fetchBooks()
-  clickListener()
-})
+fetchBooks()
+main.addEventListener('mouseover', eventFn)
