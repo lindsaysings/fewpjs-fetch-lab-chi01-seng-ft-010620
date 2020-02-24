@@ -1,7 +1,7 @@
 const main = document.querySelector('main')
 let data;
 
-function fetchBooks() {
+const fetchBooks = () => {
   return fetch('https://anapioficeandfire.com/api/books')
   .then(resp => resp.json())
   .then(gotData => {
@@ -10,7 +10,7 @@ function fetchBooks() {
   })
 };
 
-function renderBooks(gotData) {
+const renderBooks = (gotData) => {
   gotData.forEach(book => {
     const h1 = document.createElement('h1')
     const h3 = document.createElement('h3')
